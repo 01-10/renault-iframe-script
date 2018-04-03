@@ -66,6 +66,7 @@ function logUnexpectedArgument(argument) {
 
 function scroll(...args) {
     let position = -1
+    let offset = -16
     let animate = false
 
     if (args.length > 0) {
@@ -89,8 +90,17 @@ function scroll(...args) {
             return
         }
     }
+    if (args.length > 0) {
+        if ('number' === typeof args[0]) {
+            offset = args.shift()
+        }
+    }
     if (args.length > 0) {
         animate = args[0] === true
+    }
+
+    if (position >= 0) {
+        position = Math.max(0, position + offset)
     }
 
     console.log(`[RenaultFrame] Scroll to: ${ position === -1 ? 'top' : position }`)
