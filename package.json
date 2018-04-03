@@ -8,7 +8,7 @@
   },
   "author": "SLAVA",
   "license": "ISC",
-  "main": "src/iframe.js",
+  "main": "src/client.js",
   "scripts": {
     "build": "npm run prod",
     "prod": "ENV=production node_modules/.bin/webpack",
