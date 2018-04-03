@@ -39,10 +39,23 @@ import { MESSAGE_PREFIX } from './common'
     }
 
     function setScroll(position, animate) {
+        const floatingMenu = $('.docked-nav-outer')
+        const hasFloatingMenu = floatingMenu.get(0)
+
+        let scrollTo
+        if (position === -1) {
+            scrollTo = 0
+        } else {
+            scrollTo = $(getIframe()).position().top + position
+
+            const floatingMenuBreakpoint = $('header').outerHeight()
+            if (hasFloatingMenu && scrollTo > floatingMenuBreakpoint) {
+                scrollTo -= floatingMenu.outerHeight()
+            }
+        }
+
         $('html, body')[animate ? 'animate' : 'prop']({
-            scrollTop: position >= 0
-                    ? $(getIframe()).position().top + position
-                    : 0,
+            scrollTop: Math.max(0, scrollTo),
         })
     }
 
