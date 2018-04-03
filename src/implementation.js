@@ -19,6 +19,10 @@ function enqueue(cb) {
     }
 }
 
+function sendQueuedMessage(...args) {
+    enqueue(() => message(...args))
+}
+
 if (window !== parent) {
     window.addEventListener('message', ({ data }) => {
         if (data === 'pong') {
@@ -110,5 +114,5 @@ function scroll(...args) {
 export {
     resize,
     scroll,
-    message,
+    sendQueuedMessage as message,
 }
