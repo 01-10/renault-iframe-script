@@ -63,3 +63,11 @@
   совершить гладкий (анимированный) скролл.
   
   Например: `RenaultFrame.scroll(document.querySelector('h1'), true);`
+
+##### Отправка сообщений в родительское окно
+
+- `RenaultFrame.message(msg)` и `RenaultFrame.message(msg, origin)` отправлят
+  произвольное сообщение в родительское окно. Отправляемое сообщение должно
+  быть строкой.
+  
+  Например: `RenaultFrame.message('GA-page|some-action_complete')`

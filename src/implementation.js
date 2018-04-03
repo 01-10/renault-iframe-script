@@ -110,4 +110,5 @@ function scroll(...args) {
 export {
     resize,
     scroll,
+    message,
 }
