@@ -1,6 +1,3 @@
-import { resize, scroll } from './client'
+import RenaultFrame from './client'
 
-window.RenaultFrame = {
-    resize,
-    scroll,
-}
+window.RenaultFrame = RenaultFrame
