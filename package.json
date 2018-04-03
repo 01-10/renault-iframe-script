@@ -1,0 +1,11 @@
+{
+  "name": "renault-iframe-script",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/01-10/renault-iframe-script.git"
+  },
+  "author": "SLAVA",
+  "license": "ISC"
+}
