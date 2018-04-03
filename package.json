@@ -7,5 +7,6 @@
     "url": "git+https://github.com/01-10/renault-iframe-script.git"
   },
   "author": "SLAVA",
-  "license": "ISC"
+  "license": "ISC",
+  "main": "src/iframe.js"
 }
