@@ -1,4 +1,4 @@
-import { MESSAGE_PREFIX } from './common'
+import { MESSAGE_PREFIX } from '../implementation/common'
 
 (function () {
 
