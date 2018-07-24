@@ -9,5 +9,5 @@ import { replaceAllAutomagically, replaceIframe } from '../implementation/server
 })()
 
 window.RenaultTopFrame = {
-    replace: replaceIframe,
+    forwardParameters: replaceIframe,
 }

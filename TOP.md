@@ -22,12 +22,12 @@
 3. Для большего контроля над пробрасываемыми параметрами **вместо** изменения
    URL фрейма сделайте следующий вызов:
    
-   `RenaultTopFrame.replace(iframe, targetURL, allowedParameters)`
+   `RenaultTopFrame.forwardParameters(iframe, targetURL, allowedParameters)`
    
    Например:
    
    ```
-   RenaultTopFrame.replace(
+   RenaultTopFrame.forwardParameters(
      document.querySelector('.section.iframe iframe'),
      "https://benefits.renault.ru/vitrine/10",
      [ "utm_source", "utm_medium" ]
