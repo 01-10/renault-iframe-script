@@ -60,7 +60,7 @@ import { MESSAGE_PREFIX } from '../implementation/common'
     }
 
     function messageHandler({ data, source }) {
-        if (data.substring(0, 6) !== MESSAGE_PREFIX) {
+        if (typeof data !== "string" || data.substring(0, 6) !== MESSAGE_PREFIX) {
             return
         }
 
@@ -68,7 +68,9 @@ import { MESSAGE_PREFIX } from '../implementation/common'
         switch (json.type) {
             case 'ping':
                 if (getIframe()) {
-                    source.postMessage('pong', '*')
+                    source.postMessage('pong|' + JSON.stringify({
+                        url: location.href,
+                    }), '*')
                 }
                 break
             case 'height':
