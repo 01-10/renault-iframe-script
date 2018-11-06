@@ -2,6 +2,7 @@ import { MESSAGE_PREFIX } from './common'
 
 const queue = []
 let initialized = false, pingInterval
+let parentState = {}
 
 function message(message, origin = '*') {
     window.parent.postMessage(message, origin)
@@ -25,7 +26,8 @@ function sendQueuedMessage(...args) {
 
 if (window !== parent) {
     window.addEventListener('message', ({ data }) => {
-        if (data === 'pong') {
+        if (!initialized && data.substring(0, 5) === 'pong|') {
+            parentState = JSON.parse(data.substring(5))
             initialized = true
             clearInterval(pingInterval)
             console.log(`[RenaultFrame] Initialized`)
@@ -111,8 +113,13 @@ function scroll(...args) {
     enqueue(() => sendMessage({ type: 'scroll', position, animate }))
 }
 
+function getParentInfo(cb) {
+    enqueue(() => cb(parentState))
+}
+
 export {
     resize,
     scroll,
     sendQueuedMessage as message,
+    getParentInfo,
 }

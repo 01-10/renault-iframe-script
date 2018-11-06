@@ -2,8 +2,9 @@ const path = require('path')
 
 const config = {
     entry: {
-        gtm: path.join(__dirname, 'src', 'gtm.js'),
-        iframe: path.join(__dirname, 'src', 'iframe.js'),
+        gtm: path.join(__dirname, 'src', 'entry', 'gtm.js'),
+        iframe: path.join(__dirname, 'src', 'entry', 'iframe.js'),
+        top: path.join(__dirname, 'src', 'entry', 'top.js'),
     },
     output: {
         filename: '[name].js',
