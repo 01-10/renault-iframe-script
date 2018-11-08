@@ -5,7 +5,7 @@
 1. Добавьте следующий скрипт в раздел `<head>` вашей страницы:
   
   ```html
-  <script src="https://live.renault.ru/gtm/iframe.js"></script>
+  <script src="https://live.renault.ru/gtm/?iframe"></script>
   ```
 
 2. Добавьте следующий вызов после загрузки страницы:
