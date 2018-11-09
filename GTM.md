@@ -4,7 +4,7 @@
 
 Подключение производится без участия разработчика проекта.
 
-1. Подключите скрипт `https://live.renault.ru/gtm/gtm.js` к странице
+1. Подключите скрипт `https://live.renault.ru/gtm/?gtm` к странице
   на www.renault.ru (через GTM). Для этого:
   
     * Создайте новый `trigger` со следующей конфигурацией:
@@ -17,7 +17,7 @@
     в качестве `HTML` следующий код:
     
     ```
-    <script src="https://live.renault.ru/gtm/gtm.js" type="text/javascript"></script>
+    <script src="https://live.renault.ru/gtm/?gtm" type="text/javascript"></script>
     ```
     
     В качестве Названия установите '<ВАШ_ПРОЕКТ>_iframe_trigger', подставив название вашего проекта
@@ -31,7 +31,7 @@
 2. Средствами Helios добавьте на страницу IFRAME со следующим адресом:
   
   ```
-  javascript:void(p%3Dwindow.parent.document%2Cs%3Dp.createElement('script')%2Cs.src%3D'%2F%2Flive.renault.ru%2Fgtm%2Fgtm.js'%2Cp.querySelector('head').appendChild(s))
+  javascript:void(p%3Dwindow.parent.document%2Cs%3Dp.createElement('script')%2Cs.src%3D'%2F%2Flive.renault.ru%2Fgtm%2F%3Fgtm'%2Cp.querySelector('head').appendChild(s))
   ```
   
   Примечание: в этом пункте нет опечатки. Вам действительно необходимо
