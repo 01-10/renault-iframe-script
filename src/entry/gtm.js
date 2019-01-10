@@ -19,7 +19,8 @@ import { MESSAGE_PREFIX } from '../implementation/common'
 
     function getIframe() {
         if (iframe === undefined) {
-            iframe = document.querySelector('.section.iframe iframe')
+            iframe = document.querySelector('.section.iframe iframe[src*="gtm-resize-enable"]')
+                    || document.querySelector('.section.iframe iframe')
 
             ;['t', 'webkitT', 'msT', 'mozT', 'oT'].forEach(function (prefix) {
                 iframe.style[prefix + 'ransition'] = 'none'
@@ -60,7 +61,7 @@ import { MESSAGE_PREFIX } from '../implementation/common'
     }
 
     function messageHandler({ data, source }) {
-        if (typeof data !== "string" || data.substring(0, 6) !== MESSAGE_PREFIX) {
+        if (typeof data !== 'string' || data.substring(0, 6) !== MESSAGE_PREFIX) {
             return
         }
 
