@@ -2,8 +2,6 @@ import { MESSAGE_PREFIX } from '../implementation/common'
 
 (function () {
 
-    let iframe
-
     if (window[MESSAGE_PREFIX + '_init']) {
         return
     }
@@ -17,29 +15,18 @@ import { MESSAGE_PREFIX } from '../implementation/common'
         }
     }, 330)
 
-    function getIframe() {
-        if (iframe === undefined) {
-            iframe = document.querySelector('.section.iframe iframe[src*="gtm-resize-enable"]')
-                    || document.querySelector('.section.iframe iframe')
-
-            ;['t', 'webkitT', 'msT', 'mozT', 'oT'].forEach(function (prefix) {
-                iframe.style[prefix + 'ransition'] = 'none'
-            })
-
-            const style = document.createElement('style')
-            style.type = 'text/css'
-            style.innerHTML = '.content-zone .grid-row.bleed { max-width: auto !important; }'
-            document.querySelector('head').appendChild(style)
-        }
-
-        return iframe
+    function applyGlobalStyles() {
+        const style = document.createElement('style')
+        style.type = 'text/css'
+        style.innerHTML = '.content-zone .grid-row.bleed { max-width: auto !important; }'
+        document.querySelector('head').appendChild(style)
     }
 
-    function setHeight(height) {
+    function setHeight(iframe, height) {
         iframe.style.height = height + 'px'
     }
 
-    function setScroll(position, animate) {
+    function setScroll(iframe, position, animate) {
         const floatingMenu = $('.docked-nav-outer')
         const hasFloatingMenu = floatingMenu.get(0)
 
@@ -47,7 +34,7 @@ import { MESSAGE_PREFIX } from '../implementation/common'
         if (position === -1) {
             scrollTo = 0
         } else {
-            scrollTo = $(getIframe()).position().top + position
+            scrollTo = $(iframe).position().top + position
 
             const floatingMenuBreakpoint = $('header').outerHeight()
             if (hasFloatingMenu && scrollTo > floatingMenuBreakpoint) {
@@ -60,29 +47,37 @@ import { MESSAGE_PREFIX } from '../implementation/common'
         })
     }
 
+    function findIframe(sourceWindow) {
+        for (let iframe of document.querySelectorAll('iframe')) {
+            if (iframe.contentWindow === sourceWindow) {
+                return iframe
+            }
+        }
+    }
+
     function messageHandler({ data, source }) {
         if (typeof data !== 'string' || data.substring(0, 6) !== MESSAGE_PREFIX) {
             return
         }
 
         const json = JSON.parse(data.substring(MESSAGE_PREFIX.length))
+        const iframe = findIframe(source)
         switch (json.type) {
             case 'ping':
-                if (getIframe()) {
-                    source.postMessage('pong|' + JSON.stringify({
-                        url: location.href,
-                    }), '*')
-                }
+                source.postMessage('pong|' + JSON.stringify({
+                    url: location.href,
+                }), '*')
                 break
             case 'height':
-                setHeight(json.height)
+                setHeight(iframe, json.height)
                 break
             case 'scroll':
-                setScroll(json.position, json.animate)
+                setScroll(iframe, json.position, json.animate)
                 break
         }
     }
 
+    applyGlobalStyles()
     window.addEventListener('message', messageHandler)
 
 })()
